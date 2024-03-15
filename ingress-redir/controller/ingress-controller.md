@@ -1,0 +1,1 @@
+ helm upgrade -i   redir-controller ingress-nginx/ingress-nginx   --namespace ingress-redir --values values.yaml 

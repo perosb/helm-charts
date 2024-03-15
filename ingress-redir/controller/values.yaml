@@ -1,0 +1,15 @@
+controller:
+  replicaCount: 2
+  ingressClass: redir-ingress
+  ingressClassByName: true
+  ingressClassResource:
+    name: redir-ingress
+    controllerValue: k8s.io/redir-ingress
+    enabled: true
+
+  service:
+    externalTrafficPolicy: Local
+  config:
+    enable-real-ip: "true"
+defaultBackend:
+  enabled: true

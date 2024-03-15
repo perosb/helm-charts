@@ -1,0 +1,38 @@
+ingress:
+  ingressClassName: redir-ingress
+  clusterIssuer: letsencrypt
+  defaultRedirect: https://www.muppets.com
+  backend:
+    name: redir-controller-ingress-nginx-defaultbackend
+  hosts:
+    - host:
+        name: kermit
+        names:
+          - kermit.se
+        tls: true
+        redir: /frog
+    - host:
+        name: frog
+        names:
+          - frog.ster
+        tls: true
+        redir: /frog$request_uri
+    - host:
+        name: regexp
+        names:
+          - kermit.no
+          - kermit.dk
+        tls: true
+        path: /frog/(.*)
+        redir: /frog/$1
+    - host:
+        name: piggy
+        names:
+          - misspiggy.com
+        tls: true
+        www: false
+        redir: https://www.kermit.se$request_uri
+  globals:
+    - host:
+        path: /corporate/*
+        redir: $request_uri

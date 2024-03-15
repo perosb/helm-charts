@@ -1,0 +1,8 @@
+nameOverride: ""
+fullnameOverride: ""
+
+ingress:
+  hosts:
+  backend:
+    name: defaultbackend
+    port: 80

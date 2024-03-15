@@ -1,0 +1,23 @@
+{{- if .Values.ingress.defaultRedirect }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: default-redirect
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/permanent-redirect: {{ default "nginx" .Values.ingress.defaultRedirect }}
+
+spec:
+  ingressClassName: {{ default "nginx" .Values.ingress.ingressClassName }}
+  rules:
+      - http:
+          paths:
+            - path: /
+              pathType: Prefix
+              backend:
+                service:
+                  name: {{ .Values.ingress.backend.name }}
+                  port:
+                    number: {{ .Values.ingress.backend.port }}
+---
+{{- end }}
